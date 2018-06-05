@@ -1,4 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.junit.platform.gradle.plugin.EnginesExtension
+import org.junit.platform.gradle.plugin.FiltersExtension
+import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 
 buildscript {
     var kotlinVersion: String by extra
@@ -9,35 +12,17 @@ buildscript {
     }
     dependencies {
         classpath(kotlin("gradle-plugin", kotlinVersion))
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0")
     }
 }
 
 plugins {
-    java
     `kotlin-dsl`
 }
 
-group = "com.bulwinkel.gradle"
-version = "0.0.0"
-
-apply {
-    plugin("kotlin")
-}
-
-val kotlinVersion: String by extra
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile(kotlin("stdlib-jdk8", kotlinVersion))
-    testCompile("junit", "junit", "4.12")
-}
-
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 }

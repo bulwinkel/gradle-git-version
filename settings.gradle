@@ -1,2 +1,3 @@
 rootProject.name = 'gradle-git-version'
+include 'git-version'
 
