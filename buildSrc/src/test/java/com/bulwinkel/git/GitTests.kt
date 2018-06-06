@@ -34,7 +34,6 @@ class GitTests : Spek({
                 description.isNotBlank() shouldBe true
                 version shouldEqual initialTag
                 commitCount.toInt() should beGreaterThan(0)
-                shortHash shouldEqual "gf9ee8b22cbc7"
             }
         }
     }
