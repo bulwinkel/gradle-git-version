@@ -20,6 +20,7 @@ buildscript {
 plugins {
     `kotlin-dsl`
     java
+    jacoco
 }
 
 apply {
@@ -74,4 +75,31 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+afterEvaluate {
+    val junitPlatformTest : JavaExec by tasks
+    jacoco {
+        toolVersion = "0.8.1"
+        applyTo(junitPlatformTest)
+    }
+    val jacocoReportTask = task<JacocoReport>("jacocoJunit5TestReport") {
+        group = "verification"
+        executionData(junitPlatformTest)
+        sourceSets(java.sourceSets["main"])
+        sourceDirectories = files(java.sourceSets["main"].allSource.srcDirs)
+        classDirectories = files(java.sourceSets["main"].output)
+    }
+
+    // make sure we generate the report whenever
+    // we build the build src
+    tasks.getByPath("build").finalizedBy(jacocoReportTask)
+}
+
+tasks.withType<JacocoReport> {
+    reports {
+        xml.isEnabled = false
+        csv.isEnabled = false
+        html.isEnabled = true
+    }
 }

@@ -16,7 +16,7 @@ apply {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
-    sourceSets["main"].java.srcDirs(file("../buildSrc/src/main/java").apply { println("exists = ${exists()}") })
+    sourceSets["main"].java.srcDirs("../buildSrc/src/main")
 }
 
 val kotlinVersion: String by rootProject.extra
