@@ -28,20 +28,22 @@ object Git {
         fun list() : List<String> = tag("--list")
     }
 
-    val tag = Tag()
+    val tag:Tag get() = Tag()
 
     //endregion
 
     //region: Describe
 
-    class Describe {
+    class Describe internal constructor(
+            private val command: String = "describe"
+    ) {
+        fun tags() : Describe = Describe("$command --tags")
+        fun match(pattern: String) : Describe = Describe("$command --match $pattern")
 
-        private fun describe(command: String) : List<String> = git("describe $command")
-
-        fun match(pattern: String) : String = describe("--match $pattern").firstOrNull() ?: ""
+        fun exec() = git(command)
     }
 
-    val describe = Describe()
+    val describe: Describe get() = Describe()
 
     //endregion
 }

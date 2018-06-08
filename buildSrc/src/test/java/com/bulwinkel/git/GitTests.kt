@@ -18,6 +18,7 @@ class GitTests : Spek({
         on("list") {
             it("should return a list of all tags") {
                 val tags = Git.tag.list()
+                println("tags = $tags")
                 tags.isEmpty() shouldBe false
                 tags should contain(initialTag)
             }
@@ -27,7 +28,7 @@ class GitTests : Spek({
     describe("Describe") {
         on("match") {
             it("should describe a tag given as the pattern") {
-                val description = Git.describe.match(initialTag)
+                val description = Git.describe.tags().match(initialTag).exec().firstOrNull() ?: ""
                 val (version, commitCount, shortHash) = description.split("-")
                 println("version = $version, commitCount = $commitCount, shortHash = $shortHash")
 

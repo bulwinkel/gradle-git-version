@@ -16,3 +16,8 @@ inline fun <T> Iterable<T>.firstOr(defaultValue: T, predicate: (T) -> Boolean): 
     for (element in this) if (predicate(element)) return element
     return defaultValue
 }
+
+inline fun <T> Iterable<T>.lastOr(defaultValue: T, predicate: (T) -> Boolean): T {
+    for (element in this) if (predicate(element)) return element
+    return defaultValue
+}
