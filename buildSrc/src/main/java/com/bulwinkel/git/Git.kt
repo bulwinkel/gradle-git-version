@@ -1,49 +1,38 @@
 package com.bulwinkel.git
 
-object Git {
-
-    private fun exec(command: String) : List<String> {
-        val p = Runtime.getRuntime().exec(command)
-
-        val result = p.waitFor()
-        if (result != 0) {
-            return emptyList()
-        }
-
-        return try {
-            p.inputStream.bufferedReader().readLines()
-        } catch (e: Throwable) {
-            emptyList()
-        }
-    }
-
-    private fun git(command: String) : List<String> = exec("git $command")
-
-    //region: Tag
-
-    class Tag {
-
-        private fun tag(command: String) : List<String> = git("tag $command")
-
-        fun list() : List<String> = tag("--list")
-    }
-
-    val tag:Tag get() = Tag()
-
-    //endregion
-
-    //region: Describe
-
-    class Describe internal constructor(
-            private val command: String = "describe"
-    ) {
-        fun tags() : Describe = Describe("$command --tags")
-        fun match(pattern: String) : Describe = Describe("$command --match $pattern")
-
-        fun exec() = git(command)
-    }
-
-    val describe: Describe get() = Describe()
-
-    //endregion
+interface Executable {
+    val command: String
 }
+
+fun Executable.readLines() : List<String> {
+    val p = Runtime.getRuntime().exec(command)
+
+    val result = p.waitFor()
+    if (result != 0) {
+        return emptyList()
+    }
+
+    return try {
+        p.inputStream.bufferedReader().readLines()
+    } catch (e: Throwable) {
+        emptyList()
+    }
+}
+
+data class Git(override val command: String = "git") : Executable
+
+val git: Git = Git()
+
+data class GitTag(override val command: String) : Executable
+
+val Git.tag: GitTag get() = GitTag("$command tag")
+
+val GitTag.list: GitTag get() = GitTag("$command --list")
+
+data class GitDescribe(override val command: String = "describe") : Executable
+
+val Git.describe: GitDescribe get() = GitDescribe("$command describe")
+
+val GitDescribe.tags : GitDescribe get() = GitDescribe("$command --tags")
+
+fun GitDescribe.match(pattern: String) = GitDescribe("$command --match $pattern")

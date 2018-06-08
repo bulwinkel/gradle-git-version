@@ -1,11 +1,17 @@
 package com.bulwinkel.gitversion
 
 import com.bulwinkel.git.Git
+import com.bulwinkel.git.describe
+import com.bulwinkel.git.readLines
+import com.bulwinkel.git.list
+import com.bulwinkel.git.match
+import com.bulwinkel.git.tag
+import com.bulwinkel.git.tags
 
 private val defaultVersionRegex = Regex("\\d+\\.\\d+\\.\\d+")
 
 fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : String {
-    val allTags = tag.list()
+    val allTags = tag.list.readLines()
     println("allTags = $allTags")
     val latestVersionTag = allTags
             .lastOrNull { it.matches(versionRegex) } ?: ""
@@ -13,5 +19,5 @@ fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : St
 
     if (latestVersionTag.isEmpty()) return ""
 
-    return describe.tags().match(latestVersionTag).exec().firstOrNull() ?: ""
+    return describe.tags.match(latestVersionTag).readLines().firstOrNull() ?: ""
 }
