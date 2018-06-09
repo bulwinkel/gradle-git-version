@@ -19,15 +19,18 @@ fun Executable.readLines() : List<String> {
     }
 }
 
+
 data class Git(override val command: String = "git") : Executable
 
 val git: Git = Git()
+
 
 data class GitTag(override val command: String) : Executable
 
 val Git.tag: GitTag get() = GitTag("$command tag")
 
 val GitTag.list: GitTag get() = GitTag("$command --list")
+
 
 data class GitDescribe(override val command: String = "describe") : Executable
 
