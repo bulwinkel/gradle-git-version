@@ -1,6 +1,7 @@
 package com.bulwinkel.gitversion
 
 import com.bulwinkel.git.git
+import io.kotlintest.matchers.beGreaterThan
 import io.kotlintest.matchers.should
 import io.kotlintest.matchers.startWith
 import org.jetbrains.spek.api.Spek
@@ -13,6 +14,14 @@ class GitCommandsTests : Spek({
             val versionName = git.describeLatestVersionTag()
             println("versionName = $versionName")
             versionName should startWith("0.0.1")
+        }
+    }
+
+    on("totalReachableCommits") {
+        it("should return the total number of commits reachable from the current commit") {
+            val totalReachableCommits = git.totalReachableCommits()
+            println("totalReachableCommits = $totalReachableCommits")
+            totalReachableCommits should beGreaterThan(5)
         }
     }
 })
