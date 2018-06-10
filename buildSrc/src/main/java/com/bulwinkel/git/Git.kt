@@ -20,9 +20,12 @@ fun Executable.readLines() : List<String> {
 }
 
 
+const val HEAD = "HEAD"
+
+
 data class Git(override val command: String = "git") : Executable
 
-val git: Git = Git()
+val git: Git get() = Git()
 
 
 data class GitTag(override val command: String) : Executable
@@ -39,3 +42,12 @@ val Git.describe: GitDescribe get() = GitDescribe("$command describe")
 val GitDescribe.tags : GitDescribe get() = GitDescribe("$command --tags")
 
 fun GitDescribe.match(pattern: String) = GitDescribe("$command --match $pattern")
+
+
+data class GitRevList(override val command: String) : Executable
+
+val Git.revList: GitRevList get() = GitRevList("$command rev-list")
+
+operator fun GitRevList.get(commitIds: String) = GitRevList("$command $commitIds")
+
+val GitRevList.count: GitRevList get() = GitRevList("$command --count")
