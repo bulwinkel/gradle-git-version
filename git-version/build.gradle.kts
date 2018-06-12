@@ -1,10 +1,9 @@
+import com.bulwinkel.gitversion.GitVersion
+import com.bulwinkel.gitversion.GitVersionPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.junit.platform.gradle.plugin.EnginesExtension
 import org.junit.platform.gradle.plugin.FiltersExtension
 import org.junit.platform.gradle.plugin.JUnitPlatformExtension
-
-group = "com.bulwinkel.gradle"
-version = "0.0.0"
 
 plugins {
     java
@@ -12,7 +11,13 @@ plugins {
 
 apply {
     plugin("kotlin")
+    plugin<GitVersionPlugin>()
 }
+
+val gitVersion: GitVersion by extra
+
+group = "com.bulwinkel.gradle"
+version = gitVersion.name
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
