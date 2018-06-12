@@ -71,6 +71,7 @@ dependencies {
         exclude(group = "org.jetbrains.kotlin")
     }
     testCompile("io.kotlintest:kotlintest:2.0.7")
+    testCompile(gradleTestKit())
 }
 
 tasks.withType<KotlinCompile> {
