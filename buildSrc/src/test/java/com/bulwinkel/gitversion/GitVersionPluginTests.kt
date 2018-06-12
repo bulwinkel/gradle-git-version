@@ -23,7 +23,7 @@ class GitVersionPluginTests : Spek({
                 println("gitVersion.name = ${gitVersion.name}, gitVersion.buildNumber = ${gitVersion.buildNumber}")
 
                 //language=RegExp
-                gitVersion.name should match("\\d+\\.\\d+\\.\\d(-\\d-.*)?")
+                gitVersion.name should match("\\d+\\.\\d+\\.\\d+(-\\d+-.*)?")
                 gitVersion.buildNumber should beGreaterThan(0)
             }
         }
