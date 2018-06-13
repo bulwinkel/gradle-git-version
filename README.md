@@ -1,6 +1,6 @@
 gradle-git-version
 ===
-Gradle plugin for generating version information based on git tags.
+Gradle plugin that provides version information based on your git repository.
 
 License
 ===
