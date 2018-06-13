@@ -29,14 +29,6 @@ val kotlinVersion: String by rootProject.extra
 dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     implementation(gradleApi())
-//    testCompile("org.jetbrains.spek:spek-api:1.1.5") {
-//        exclude(group = "org.jetbrains.kotlin")
-//    }
-//    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:1.1.5") {
-//        exclude(group = "org.junit.platform")
-//        exclude(group = "org.jetbrains.kotlin")
-//    }
-//    testCompile("io.kotlintest:kotlintest:2.0.7")
 }
 
 tasks.withType<KotlinCompile> {
