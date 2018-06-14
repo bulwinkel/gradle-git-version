@@ -7,11 +7,12 @@ import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 
 plugins {
     `java-library`
+    id ("com.gradle.plugin-publish") version ("0.9.7")
 }
 
 apply {
     plugin("kotlin")
-    plugin<GitVersionPlugin>()
+    plugin("com.bulwinkel.gradle.git-version")
 }
 
 val gitVersion: GitVersion by extra
@@ -21,7 +22,8 @@ version = gitVersion.name
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
-    sourceSets["main"].java.srcDirs("../buildSrc/src/main")
+    sourceSets["main"].java.srcDirs("../buildSrc/src/main/java")
+    sourceSets["main"].resources.srcDirs("../buildSrc/src/main/resources")
 }
 
 val kotlinVersion: String by rootProject.extra
@@ -34,3 +36,12 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+//region: Publishing
+
+pluginBundle {
+    website = "https://github.com/bulwinkel/gradle-git-version"
+    vcsUrl = website
+}
+
+//endregion
