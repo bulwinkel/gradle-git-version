@@ -7,6 +7,7 @@ import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 
 plugins {
     `java-library`
+    `kotlin-dsl`
     id ("com.gradle.plugin-publish") version ("0.9.7")
 }
 
@@ -42,6 +43,18 @@ tasks.withType<KotlinCompile> {
 pluginBundle {
     website = "https://github.com/bulwinkel/gradle-git-version"
     vcsUrl = website
+    plugins.create("gitVersion") {
+        id = "com.bulwinkel.gradle.git-version"
+        displayName = "Git Version"
+        description = "Exposes customizable version information to your project based on your git repository."
+        tags = listOf(
+                "git",
+                "version",
+                "versioning",
+                "buildNumber",
+                "versionName"
+        )
+    }
 }
 
 //endregion

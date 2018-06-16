@@ -10,6 +10,16 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 
+fun GitVersion.assertValid() {
+    val gitVersion = this
+    gitVersion shouldNotBe null
+    println("gitVersion.name = ${gitVersion.name}, gitVersion.buildNumber = ${gitVersion.buildNumber}")
+
+    //language=RegExp
+    gitVersion.name should match("\\d+\\.\\d+\\.\\d+(-\\d+-.*)?")
+    gitVersion.buildNumber should beGreaterThan(0)
+}
+
 class GitVersionPluginTests : Spek({
 
     describe("GitVersionPlugin") {
@@ -19,12 +29,15 @@ class GitVersionPluginTests : Spek({
                 project.pluginManager.apply(GitVersionPlugin::class.java)
 
                 val gitVersion = project.extensions.extraProperties["gitVersion"] as GitVersion
-                gitVersion shouldNotBe null
-                println("gitVersion.name = ${gitVersion.name}, gitVersion.buildNumber = ${gitVersion.buildNumber}")
+                gitVersion.assertValid()
+            }
 
-                //language=RegExp
-                gitVersion.name should match("\\d+\\.\\d+\\.\\d+(-\\d+-.*)?")
-                gitVersion.buildNumber should beGreaterThan(0)
+            it("should be able to be applied by its id") {
+                val project = ProjectBuilder.builder().build()
+                project.pluginManager.apply("com.bulwinkel.gradle.git-version")
+
+                val gitVersion = project.extensions.extraProperties["gitVersion"] as GitVersion
+                gitVersion.assertValid()
             }
         }
     }
