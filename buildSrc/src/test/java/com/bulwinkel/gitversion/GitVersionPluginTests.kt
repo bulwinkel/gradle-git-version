@@ -1,8 +1,11 @@
 package com.bulwinkel.gitversion
 
+import com.bulwinkel.gitversion.GitVersionPlugin.Companion.TASK_GROUP
+import com.bulwinkel.gitversion.GitVersionPlugin.Companion.TASK_NAME_VERSION_REPORT
 import io.kotlintest.matchers.beGreaterThan
 import io.kotlintest.matchers.match
 import io.kotlintest.matchers.should
+import io.kotlintest.matchers.shouldEqual
 import io.kotlintest.matchers.shouldNotBe
 import org.gradle.testfixtures.ProjectBuilder
 import org.jetbrains.spek.api.Spek
@@ -38,6 +41,14 @@ class GitVersionPluginTests : Spek({
 
                 val gitVersion = project.extensions.extraProperties["gitVersion"] as GitVersion
                 gitVersion.assertValid()
+            }
+
+            it("should create a task that outputs the current version information") {
+                val project = ProjectBuilder.builder().build()
+                project.pluginManager.apply("com.bulwinkel.gradle.git-version")
+                val task = project.tasks.getByName(TASK_NAME_VERSION_REPORT)
+                task shouldNotBe null
+                task.group shouldEqual TASK_GROUP
             }
         }
     }

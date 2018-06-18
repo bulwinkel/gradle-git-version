@@ -12,8 +12,8 @@ open class GitVersionPlugin : Plugin<Project> {
     }
 
     private fun TaskContainer.createVersionReportTask(gitVersion: GitVersion) {
-        create("versionReport") {
-            group = "versioning"
+        create(TASK_NAME_VERSION_REPORT) {
+            group = TASK_GROUP
             doLast {
                 println("""
 
@@ -25,5 +25,10 @@ open class GitVersionPlugin : Plugin<Project> {
                 """.trimIndent())
             }
         }
+    }
+
+    companion object {
+        @JvmStatic val TASK_NAME_VERSION_REPORT = "versionReport"
+        @JvmStatic val TASK_GROUP = "versioning"
     }
 }
