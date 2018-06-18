@@ -18,8 +18,7 @@ fun GitVersion.assertValid() {
     gitVersion shouldNotBe null
     println("gitVersion.name = ${gitVersion.name}, gitVersion.buildNumber = ${gitVersion.buildNumber}")
 
-    //language=RegExp
-    gitVersion.name should match("\\d+\\.\\d+\\.\\d+(-\\d+-.*)?")
+    gitVersion.name should match(SEMANTIC_GIT_VERSION_PATTERN)
     gitVersion.buildNumber should beGreaterThan(0)
 }
 
