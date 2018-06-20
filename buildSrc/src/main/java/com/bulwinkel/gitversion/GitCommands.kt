@@ -16,10 +16,8 @@ private val defaultVersionRegex = Regex("\\d+\\.\\d+\\.\\d+")
 
 fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : String {
     val allTags = tag.list.readLines()
-    println("allTags = $allTags")
     val latestVersionTag = allTags
             .lastOrNull { it.matches(versionRegex) } ?: ""
-    println("latestVersionTag = $latestVersionTag")
 
     if (latestVersionTag.isEmpty()) return ""
 
