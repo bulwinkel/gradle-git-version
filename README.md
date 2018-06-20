@@ -1,6 +1,53 @@
-gradle-git-version
+GitVersion
 ===
-Gradle plugin that provides version information based on your git repository.
+
+GitVersion calculates a unique version name and build number for each commit based on your most recent semantically versioned tag.
+
+Quick Start
+---
+### Apply plugin
+Apply the plugin in the plugins block, latest version can be found [here](releases):
+```groovy
+plugins {
+   id 'com.bulwinkel.gradle.git-version' version '0.2.0'
+}
+```
+Assign the `gitVersion.name` and `gitVersion.buildNumber` to the relevant places in your project, e.g.
+
+Android app or library:
+```groovy
+android {
+  defaultConfig {
+    //...
+    versionCode gitVersion.buildNumber
+    versionName gitVersion.name
+  }
+  //...
+}
+```
+
+Java project:
+```groovy
+group = "com.example"
+version = gitVersion.name
+```
+
+### Add a tag
+```bash
+git tag -a 0.0.0 -m "Initial Tag"
+```
+
+### Check version information
+```bash
+./gradlew versionReport
+```
+This prints a summary of the build information to the console, e.g.
+```
+GitVersion Report
+-----------------
+gitVersion.name = 0.2.0-2-gc4832210da58
+gitVersion.buildNumber = 26
+```
 
 License
 ---
