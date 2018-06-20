@@ -41,7 +41,7 @@ git tag -a 0.0.0 -m "Initial Tag"
 ```bash
 ./gradlew versionReport
 ```
-This prints a summary of the build information to the console, e.g.
+This prints a summary of the generated version information to the console, e.g.
 ```
 GitVersion Report
 -----------------
