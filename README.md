@@ -6,7 +6,7 @@ GitVersion calculates a unique version name and build number for each commit bas
 Quick Start
 ---
 ### Apply plugin
-Apply the plugin in the plugins block, latest version can be found [here](releases):
+Apply the plugin in the plugins block, latest version can be found [here](https://github.com/bulwinkel/gradle-git-version/releases):
 ```groovy
 plugins {
    id 'com.bulwinkel.gradle.git-version' version '0.2.0'
