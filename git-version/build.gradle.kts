@@ -58,3 +58,14 @@ pluginBundle {
 }
 
 //endregion
+
+//region: task config
+
+// setup build task to print the version report
+afterEvaluate {
+    val build by tasks
+    val versionReport by tasks
+    build.finalizedBy(versionReport)
+}
+
+//endregion
