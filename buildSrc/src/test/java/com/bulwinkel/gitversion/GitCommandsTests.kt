@@ -1,10 +1,9 @@
 package com.bulwinkel.gitversion
 
-import com.bulwinkel.git.git
+import com.bulwinkel.cl.git.git
 import io.kotlintest.matchers.beGreaterThan
 import io.kotlintest.matchers.match
 import io.kotlintest.matchers.should
-import io.kotlintest.matchers.startWith
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on

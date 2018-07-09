@@ -1,6 +1,6 @@
 package com.bulwinkel.gitversion
 
-import com.bulwinkel.git.Git
+import com.bulwinkel.cl.git.Git
 
 class GitVersion {
     private val git = Git()

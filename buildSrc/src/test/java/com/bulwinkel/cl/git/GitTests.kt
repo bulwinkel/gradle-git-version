@@ -1,5 +1,6 @@
-package com.bulwinkel.git
+package com.bulwinkel.cl.git
 
+import com.bulwinkel.cl.readLines
 import io.kotlintest.matchers.beEmpty
 import io.kotlintest.matchers.beGreaterThan
 import io.kotlintest.matchers.contain
