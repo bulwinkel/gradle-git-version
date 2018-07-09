@@ -25,7 +25,7 @@ fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : St
 }
 
 fun Git.totalReachableCommits() : Int {
-    val headCount = revList[HEAD].count.readLines().first().toInt()
-    val headExcludingMaster = revList["HEAD..master"].count.readLines().first().toInt()
+    val headCount = revList[HEAD].count.readLines().firstOrNull()?.toInt() ?: 0
+    val headExcludingMaster = revList["HEAD..master"].count.readLines().firstOrNull()?.toInt() ?: 0
     return headCount - headExcludingMaster
 }
