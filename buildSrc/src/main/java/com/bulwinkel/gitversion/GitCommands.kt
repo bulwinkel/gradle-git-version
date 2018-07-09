@@ -7,10 +7,10 @@ import com.bulwinkel.cl.git.describe
 import com.bulwinkel.cl.git.get
 import com.bulwinkel.cl.git.list
 import com.bulwinkel.cl.git.match
-import com.bulwinkel.cl.git.readLines
 import com.bulwinkel.cl.git.revList
 import com.bulwinkel.cl.git.tag
 import com.bulwinkel.cl.git.tags
+import com.bulwinkel.cl.readLines
 
 private val defaultVersionRegex = Regex("\\d+\\.\\d+\\.\\d+")
 
