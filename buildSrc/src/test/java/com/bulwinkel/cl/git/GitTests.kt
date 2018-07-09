@@ -1,4 +1,4 @@
-package com.bulwinkel.git
+package com.bulwinkel.cl.git
 
 import io.kotlintest.matchers.beEmpty
 import io.kotlintest.matchers.beGreaterThan
@@ -6,7 +6,6 @@ import io.kotlintest.matchers.contain
 import io.kotlintest.matchers.should
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.matchers.shouldEqual
-import io.kotlintest.matchers.shouldNot
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it

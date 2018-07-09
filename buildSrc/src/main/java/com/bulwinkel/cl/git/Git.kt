@@ -1,4 +1,4 @@
-package com.bulwinkel.git
+package com.bulwinkel.cl.git
 
 interface Executable {
     val command: String
@@ -30,24 +30,32 @@ val git: Git get() = Git()
 
 data class GitTag(override val command: String) : Executable
 
-val Git.tag: GitTag get() = GitTag("$command tag")
+val Git.tag: GitTag
+    get() = GitTag("$command tag")
 
-val GitTag.list: GitTag get() = GitTag("$command --list")
+val GitTag.list: GitTag
+    get() = GitTag("$command --list")
 
 
 data class GitDescribe(override val command: String = "describe") : Executable
 
-val Git.describe: GitDescribe get() = GitDescribe("$command describe")
+val Git.describe: GitDescribe
+    get() = GitDescribe("$command describe")
 
-val GitDescribe.tags : GitDescribe get() = GitDescribe("$command --tags")
+val GitDescribe.tags : GitDescribe
+    get() = GitDescribe("$command --tags")
 
-fun GitDescribe.match(pattern: String) = GitDescribe("$command --match $pattern")
+fun GitDescribe.match(pattern: String) = GitDescribe(
+        "$command --match $pattern")
 
 
 data class GitRevList(override val command: String) : Executable
 
-val Git.revList: GitRevList get() = GitRevList("$command rev-list")
+val Git.revList: GitRevList
+    get() = GitRevList("$command rev-list")
 
-operator fun GitRevList.get(commitIds: String) = GitRevList("$command $commitIds")
+operator fun GitRevList.get(commitIds: String) = GitRevList(
+        "$command $commitIds")
 
-val GitRevList.count: GitRevList get() = GitRevList("$command --count")
+val GitRevList.count: GitRevList
+    get() = GitRevList("$command --count")
