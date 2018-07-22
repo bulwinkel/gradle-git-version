@@ -86,7 +86,7 @@ workflows:
 
   publish-workflow:
     jobs:
-      - publish
+      - publish:
         filters:
           tags:
             only: /(\d+)\.(\d+)\.(\d+)([-\w]*)/
