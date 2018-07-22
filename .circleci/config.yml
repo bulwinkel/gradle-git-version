@@ -40,3 +40,9 @@ jobs:
 
       # run tests!
     - run: gradle build
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build
