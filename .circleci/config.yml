@@ -89,4 +89,4 @@ workflows:
       - publish:
         filters:
           tags:
-            only: /(\d+)\.(\d+)\.(\d+)([-\w]*)/
+            only: /\d+\.\d+\.\d+/
