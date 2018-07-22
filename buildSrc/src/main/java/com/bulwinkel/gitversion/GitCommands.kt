@@ -12,7 +12,7 @@ import com.bulwinkel.cl.git.tag
 import com.bulwinkel.cl.git.tags
 import com.bulwinkel.cl.readLines
 
-private val defaultVersionRegex = Regex("\\d+\\.\\d+\\.\\d+")
+val defaultVersionRegex = Regex("(\\d+)\\.(\\d+)\\.(\\d+)([-\\w]*)")
 
 fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : String {
     val allTags = tag.list.readLines()
