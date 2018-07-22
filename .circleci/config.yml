@@ -83,10 +83,3 @@ workflows:
   commit-workflow:
     jobs:
       - build
-
-  publish-workflow:
-    jobs:
-      - publish:
-        filters:
-          tags:
-            only: /\d+\.\d+\.\d+/
