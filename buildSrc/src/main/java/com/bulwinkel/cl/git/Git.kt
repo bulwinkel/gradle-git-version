@@ -18,6 +18,8 @@ val Git.tag: GitTag
 val GitTag.list: GitTag
     get() = GitTag("$command --list")
 
+fun GitTag.sort(order: String): GitTag = GitTag("$command --sort=$order")
+
 
 data class GitDescribe(override val command: String = "describe") : Executable
 

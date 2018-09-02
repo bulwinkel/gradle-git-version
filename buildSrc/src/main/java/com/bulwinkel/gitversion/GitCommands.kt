@@ -8,6 +8,7 @@ import com.bulwinkel.cl.git.get
 import com.bulwinkel.cl.git.list
 import com.bulwinkel.cl.git.match
 import com.bulwinkel.cl.git.revList
+import com.bulwinkel.cl.git.sort
 import com.bulwinkel.cl.git.tag
 import com.bulwinkel.cl.git.tags
 import com.bulwinkel.cl.readLines
@@ -15,7 +16,7 @@ import com.bulwinkel.cl.readLines
 val defaultVersionRegex = Regex("(\\d+)\\.(\\d+)\\.(\\d+)([-\\w]*)")
 
 fun Git.describeLatestVersionTag(versionRegex: Regex = defaultVersionRegex) : String {
-    val allTags = tag.list.readLines()
+    val allTags = tag.list.sort("creatordate").readLines()
     val latestVersionTag = allTags
             .lastOrNull { it.matches(versionRegex) } ?: ""
 
